@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">가슴속 3천원 사장님</string>
     <string name="android_version">Android Version</string>
-    <string name="app_name_debug">가슴속 3천원 사장님_debug</string>
+    <string name="app_name_debug">(개발)가슴속 3천원 사장님</string>
     <string name="kakao_login">카카오 계정으로 로그인</string>
     <string name="naver_login">네이버 계정으로 로그인</string>
     <string name="join">회원가입</string>

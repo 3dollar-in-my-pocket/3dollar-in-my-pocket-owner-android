@@ -1,6 +1,5 @@
 package app.threedollars.manager.storeManagement.viewModel
 
-import android.net.Uri
 import androidx.lifecycle.viewModelScope
 import app.threedollars.common.BaseViewModel
 import app.threedollars.common.EventFlow
@@ -61,21 +60,33 @@ class MyViewModel @Inject constructor(
                     _isSuccess.emit(it.data == "OK")
                 }
             } else {
-                imageUploadUseCase.postImageUploadBulk(fileType, list).collect { resource ->
-                    if (resource.code == "200") {
-                        resource.data?.let { dtoList ->
-                            dtoList.mapIndexed { index, imageUploadDto ->
-                                menuModelList[index].imageUrl = imageUploadDto.imageUrl
-                            }.run {
-                                val menus = menuModelList.map { menuModel ->
-                                    MenusDto(
-                                        imageUrl = menuModel.imageUrl,
-                                        name = menuModel.name,
-                                        price = menuModel.price,
-                                    )
-                                }
-                                bossStoreUseCase.patchBossStore(bossStoreId.toString(), menus = menus).collect {
-                                    _isSuccess.emit(it.data == "OK")
+                if (list.isEmpty()) {
+                    val menus = menuModelList.filter { !it.name.isNullOrEmpty() && it.price != null && it.price!! > 0 }.map {
+                        MenusDto(
+                            name = it.name,
+                            price = it.price,
+                        )
+                    }
+                    bossStoreUseCase.patchBossStore(bossStoreId.toString(), menus = menus).collect {
+                        _isSuccess.emit(it.data == "OK")
+                    }
+                } else {
+                    imageUploadUseCase.postImageUploadBulk(fileType, list).collect { resource ->
+                        if (resource.code == "200") {
+                            resource.data?.let { dtoList ->
+                                dtoList.mapIndexed { index, imageUploadDto ->
+                                    menuModelList[index].imageUrl = imageUploadDto.imageUrl
+                                }.run {
+                                    val menus = menuModelList.map { menuModel ->
+                                        MenusDto(
+                                            imageUrl = menuModel.imageUrl,
+                                            name = menuModel.name,
+                                            price = menuModel.price,
+                                        )
+                                    }
+                                    bossStoreUseCase.patchBossStore(bossStoreId.toString(), menus = menus).collect {
+                                        _isSuccess.emit(it.data == "OK")
+                                    }
                                 }
                             }
                         }

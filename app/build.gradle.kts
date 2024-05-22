@@ -39,6 +39,7 @@ android {
         getByName("release") {
             isMinifyEnabled = false
             signingConfig = signingConfigs.getByName("release")
+            manifestPlaceholders["appName3dollar"] = "@string/app_name"
             applicationIdSuffix = ""
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -52,7 +53,7 @@ android {
         getByName("debug") {
             isMinifyEnabled = false
             applicationIdSuffix = ".debug"
-            // resValue("string", "app_name", "@string/app_name_debug")
+            manifestPlaceholders["appName3dollar"] = "@string/app_name_debug"
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

@@ -10,7 +10,7 @@
         android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_app_icon"
-        android:label="@string/app_name"
+        android:label="${appName3dollar}"
         android:roundIcon="@drawable/ic_app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.ThreeDollarsManager">
