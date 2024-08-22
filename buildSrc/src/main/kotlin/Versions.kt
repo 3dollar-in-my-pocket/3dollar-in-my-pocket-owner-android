@@ -1,14 +1,12 @@
 object Versions {
-    const val KOTLIN = "1.7.21"
-    const val KOTLIN_METADATA = "0.4.2"
-    const val GRADLE = "7.4.0"
+    const val KOTLIN = "1.9.0"
+    const val GRADLE = "8.0.0"
     const val DESUGAR_LIBS = "2.0.0"
     const val DATASTORE = "1.0.0"
     const val KAKAO_LOGIN = "2.12.1"
 
-    const val HILT = "2.44.2"
-    const val HILT_COMEPOSE = "1.0.0"
-    const val HILT_PAGING = "1.0.0-alpha03"
+    const val HILT = "2.49"
+    const val HILT_COMEPOSE = "1.1.0"
     const val CORE_KTX = "1.9.0"
     const val FRAGMENT_KTX = "1.5.5"
     const val LIFECYCLE_KTX = "2.5.1"
@@ -39,12 +37,12 @@ object Versions {
     const val FIREBASE_MESSAGING = "23.1.2"
 
     const val RETROFIT = "2.9.0"
-    const val MOSHI = "1.13.0"
+    const val MOSHI = "1.15.1"
     const val GSON = "2.8.8"
     const val MOSHI_CONVERTER = "2.4.0"
     const val OKHTTP = "4.9.1"
 
-    const val NAVER_MAP_COMPOSE = "1.3.3"
+    const val NAVER_MAP_COMPOSE = "1.5.7"
     const val LOTTIE_COMPOSE = "5.2.0"
 
     const val DIALOG_COMPOSE = "0.9.0"

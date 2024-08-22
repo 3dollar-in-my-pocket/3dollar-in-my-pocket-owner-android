@@ -1,4 +1,6 @@
 import Dependencies.common
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     id("com.android.library")
@@ -8,14 +10,18 @@ plugins {
 }
 
 android {
-    compileSdk = 33
+    val localProperties = Properties()
+    localProperties.load(FileInputStream(rootProject.file("local.properties")))
+
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 23
-        targetSdk = 33
+        targetSdk = 34
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     buildTypes {
         getByName("release") {
@@ -24,25 +30,25 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "KAKAO_KEY", com.android.build.gradle.internal.cxx.configure.gradleLocalProperties(rootDir)["kakao_key_release"] as? String ?: "")
-            buildConfigField("String", "BASE_URL", com.android.build.gradle.internal.cxx.configure.gradleLocalProperties(rootDir)["base_url_release"] as? String ?: "")
+            buildConfigField("String", "KAKAO_KEY","${localProperties["kakao_key_release"]}")
+            buildConfigField("String", "BASE_URL", "${localProperties["base_url_release"]}")
         }
 
         getByName("debug") {
-            buildConfigField("String", "KAKAO_KEY", com.android.build.gradle.internal.cxx.configure.gradleLocalProperties(rootDir)["kakao_key_dev"] as? String ?: "")
-            buildConfigField("String", "BASE_URL", com.android.build.gradle.internal.cxx.configure.gradleLocalProperties(rootDir)["base_url_dev"] as? String ?: "")
+            buildConfigField("String", "KAKAO_KEY","${localProperties["kakao_key_dev"]}")
+            buildConfigField("String", "BASE_URL", "${localProperties["base_url_dev"]}")
         }
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.0-alpha02"
+        kotlinCompilerExtensionVersion = "1.5.0"
     }
     namespace = "app.threedollars.data"
 }
