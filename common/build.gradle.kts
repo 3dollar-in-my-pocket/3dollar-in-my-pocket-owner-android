@@ -1,45 +1,13 @@
-import Dependencies.common
-
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
-     id("dagger.hilt.android.plugin")
+    id("threedollars.android.feature")
 }
 
-android {
-    compileSdk = 34
 
-    defaultConfig {
-        minSdk = 23
-        targetSdk = 34
-    }
-    buildFeatures {
-        compose = true
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-        isCoreLibraryDesugaringEnabled = true
-    }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.0"
-    }
+android {
     namespace = "app.threedollars.common"
 }
 
 dependencies {
-    common()
+    implementation(libs.play.services.measurement.api)
+    implementation(libs.gson)
 }

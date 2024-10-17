@@ -1,26 +1,15 @@
-import Dependencies.common
 import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    id("threedollars.android.library")
 }
 
 android {
     val localProperties = Properties()
     localProperties.load(FileInputStream(rootProject.file("local.properties")))
 
-    compileSdk = 34
-
-    defaultConfig {
-        minSdk = 23
-        targetSdk = 34
-    }
     buildFeatures {
-        compose = true
         buildConfig = true
     }
     buildTypes {
@@ -39,22 +28,22 @@ android {
             buildConfigField("String", "BASE_URL", "${localProperties["base_url_dev"]}")
         }
     }
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.0"
-    }
     namespace = "app.threedollars.data"
 }
 
 dependencies {
-    common()
-    implementation(project(":common"))
-    implementation(project(":domain"))
+    implementation(projects.common)
+    implementation(projects.domain)
+
+    implementation(libs.okhttp3)
+    implementation(libs.okhttp3.logging)
+    implementation(libs.retrofit)
+    implementation(libs.moshi)
+    implementation(libs.moshi.converter)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.moshi.codegen)
+    implementation(libs.datastore)
+    implementation(libs.datastore.preferences)
+    implementation(libs.paging)
+
 }
