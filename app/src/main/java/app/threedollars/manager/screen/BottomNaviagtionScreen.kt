@@ -1,7 +1,10 @@
 package app.threedollars.manager.screen
 
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -22,17 +25,19 @@ fun BottomNavigation(navController: NavController) {
     )
     var backgroundColor by remember { mutableStateOf(Color.White) }
 
-    androidx.compose.material.BottomNavigation(
-        backgroundColor = backgroundColor,
+    NavigationBar(
+        containerColor = backgroundColor,
         contentColor = Color.Black
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
         items.forEach { item ->
-            BottomNavigationItem(
+            NavigationBarItem(
                 icon = { Icon(painterResource(id = item.icon), contentDescription = null) },
-                selectedContentColor = colorResource(id = R.color.green500),
-                unselectedContentColor = Gray50,
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = colorResource(id = R.color.green500),
+                    unselectedIconColor = Gray50
+                ),
                 alwaysShowLabel = true,
                 selected = currentRoute == item.screenRoute,
                 onClick = {

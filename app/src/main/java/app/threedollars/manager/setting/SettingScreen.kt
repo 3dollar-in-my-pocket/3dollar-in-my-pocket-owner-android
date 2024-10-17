@@ -2,7 +2,6 @@ package app.threedollars.manager.setting
 
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -17,8 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Switch
-import androidx.compose.material.Text
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -42,9 +41,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import app.threedollars.common.BaseDialog
 import app.threedollars.manager.LoginActivity
-import app.threedollars.manager.MainActivity
 import app.threedollars.manager.R
-import app.threedollars.manager.sign.LoginNavItem
 import app.threedollars.manager.sign.viewmodel.SettingViewModel
 import app.threedollars.manager.util.findActivity
 import com.google.firebase.messaging.FirebaseMessaging

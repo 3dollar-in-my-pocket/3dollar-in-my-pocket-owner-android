@@ -27,12 +27,12 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -235,9 +235,9 @@ class MenuManagementActivity : ComponentActivity() {
                                                 placeholder = { Text("메뉴를 입력해 주세요", fontSize = 14.sp, fontWeight = FontWeight.W400) },
                                                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Next),
                                                 shape = RoundedCornerShape(8.dp),
-                                                colors = TextFieldDefaults.textFieldColors(
-                                                    placeholderColor = Gray30,
-                                                    backgroundColor = Gray5,
+                                                colors = TextFieldDefaults.colors(
+                                                    focusedPlaceholderColor = Gray30,
+                                                    focusedContainerColor = Gray5,
                                                     cursorColor = Gray30,
                                                     disabledTextColor = Color.Transparent,
                                                     focusedIndicatorColor = Color.Transparent,
@@ -269,9 +269,9 @@ class MenuManagementActivity : ComponentActivity() {
                                                 placeholder = { Text("가격을 입력해 주세요", fontSize = 14.sp, fontWeight = FontWeight.W400) },
                                                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Done),
                                                 shape = RoundedCornerShape(8.dp),
-                                                colors = TextFieldDefaults.textFieldColors(
-                                                    placeholderColor = Gray30,
-                                                    backgroundColor = Gray5,
+                                                colors = TextFieldDefaults.colors(
+                                                    focusedPlaceholderColor = Gray30,
+                                                    focusedContainerColor = Gray5,
                                                     cursorColor = Gray30,
                                                     disabledTextColor = Color.Transparent,
                                                     focusedIndicatorColor = Color.Transparent,
@@ -362,7 +362,7 @@ class MenuManagementActivity : ComponentActivity() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(64.dp),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = Green, contentColor = Color.White),
+                    colors = ButtonDefaults.buttonColors(containerColor = Green, contentColor = Color.White),
                     onClick = {
                         if (isClickDeleteButton) {
                             isClickDeleteButton = false
@@ -474,7 +474,7 @@ class MenuManagementActivity : ComponentActivity() {
                         shape = RoundedCornerShape(24.dp),
                         colors = ButtonDefaults.buttonColors(
                             contentColor = Color.White,
-                            backgroundColor = Gray70,
+                            containerColor = Gray70,
                         ),
                     ) {
                         Text(text = "취소", fontSize = 14.sp)
@@ -488,7 +488,7 @@ class MenuManagementActivity : ComponentActivity() {
                         shape = RoundedCornerShape(24.dp),
                         colors = ButtonDefaults.buttonColors(
                             contentColor = Color.White,
-                            backgroundColor = Green,
+                            containerColor = Green,
                         ),
                     ) {
                         Text(text = "삭제", fontSize = 14.sp)

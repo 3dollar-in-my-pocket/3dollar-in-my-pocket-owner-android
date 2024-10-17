@@ -16,11 +16,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -130,9 +130,9 @@ class BossCommentActivity : ComponentActivity() {
                 placeholder = { Text("사장님 한마디를 입력해 주세요!") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Done),
                 shape = RoundedCornerShape(8.dp),
-                colors = TextFieldDefaults.textFieldColors(
-                    placeholderColor = Gray30,
-                    backgroundColor = Gray5,
+                colors = TextFieldDefaults.colors(
+                    focusedPlaceholderColor = Gray30,
+                    focusedContainerColor = Gray5,
                     cursorColor = Gray30,
                     disabledTextColor = Color.Transparent,
                     focusedIndicatorColor = Color.Transparent,
@@ -145,7 +145,7 @@ class BossCommentActivity : ComponentActivity() {
             Button(modifier = Modifier
                 .fillMaxWidth()
                 .height(64.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Green, contentColor = Color.White),
+                colors = ButtonDefaults.buttonColors(containerColor = Green, contentColor = Color.White),
                 onClick = {
                     viewModel.patchIntroduction(bossStoreId = bossStore.value?.bossStoreId, introduction = comment.text)
                 }) {
