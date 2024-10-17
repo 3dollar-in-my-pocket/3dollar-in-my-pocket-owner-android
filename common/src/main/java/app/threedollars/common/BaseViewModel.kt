@@ -4,14 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 open class BaseViewModel : ViewModel() {
 
     val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
-
     }
 
     private val _isLoading: MutableEventFlow<Boolean> = MutableEventFlow()
