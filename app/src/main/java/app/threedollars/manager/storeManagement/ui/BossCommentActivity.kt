@@ -1,6 +1,7 @@
 package app.threedollars.manager.storeManagement.ui
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
@@ -52,7 +53,7 @@ import app.threedollars.manager.storeManagement.viewModel.MyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class BossCommentActivity : AppCompatActivity() {
+class BossCommentActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

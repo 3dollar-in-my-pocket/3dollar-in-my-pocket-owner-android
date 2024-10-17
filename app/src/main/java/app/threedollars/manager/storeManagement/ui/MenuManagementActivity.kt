@@ -2,6 +2,7 @@ package app.threedollars.manager.storeManagement.ui
 
 import android.net.Uri
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.PickVisualMediaRequest
@@ -82,7 +83,7 @@ import okhttp3.RequestBody
 import java.text.DecimalFormat
 
 @AndroidEntryPoint
-class MenuManagementActivity : AppCompatActivity() {
+class MenuManagementActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -3,6 +3,7 @@ package app.threedollars.manager.storeManagement.ui.profile
 import android.app.Activity.RESULT_OK
 import android.net.Uri
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
@@ -45,7 +46,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.RequestBody
 
 @AndroidEntryPoint
-class ProfileEditActivity : AppCompatActivity() {
+class ProfileEditActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
