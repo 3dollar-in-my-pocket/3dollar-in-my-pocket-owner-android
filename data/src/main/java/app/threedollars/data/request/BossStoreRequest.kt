@@ -1,26 +1,27 @@
 package app.threedollars.data.request
 
 
-import app.threedollars.data.model.*
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import app.threedollars.data.model.AppearanceDaysRequestModel
+import app.threedollars.data.model.MenusModel
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class BossStoreRequest(
-    @Json(name = "appearanceDays")
+    @SerialName("appearanceDays")
     val appearanceDays: List<AppearanceDaysRequestModel>? = null,
-    @Json(name = "categoriesIds")
+    @SerialName("categoriesIds")
     val categoriesIds: List<String>? = null,
-    @Json(name = "imageUrl")
+    @SerialName("imageUrl")
     val imageUrl: String? = null,
-    @Json(name = "introduction")
+    @SerialName("introduction")
     val introduction: String? = null,
-    @Json(name = "menus")
+    @SerialName("menus")
     val menus: List<MenusModel>? = null,
-    @Json(name = "name")
+    @SerialName("name")
     val name: String? = null,
-    @Json(name = "snsUrl")
+    @SerialName("snsUrl")
     val snsUrl: String? = null,
-    @Json(name = "accountNumbers")
-    val accountNumbers: List<AccountNumberRequest>? = null
+    @SerialName("accountNumbers")
+    val accountNumbers: List<AccountNumberRequest>? = null,
 )

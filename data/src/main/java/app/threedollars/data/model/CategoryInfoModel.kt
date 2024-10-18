@@ -2,18 +2,18 @@ package app.threedollars.data.model
 
 
 import app.threedollars.domain.dto.CategoryInfoDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class CategoryInfoModel(
-    @Json(name = "category")
+    @SerialName("category")
     val category: String = "",
-    @Json(name = "description")
+    @SerialName("description")
     val description: String = "",
-    @Json(name = "displayOrder")
-    val displayOrder: String = ""
-){
+    @SerialName("displayOrder")
+    val displayOrder: String = "",
+) {
     fun toDto() = CategoryInfoDto(category, description, displayOrder)
 
 }

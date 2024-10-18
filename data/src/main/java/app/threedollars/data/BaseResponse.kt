@@ -1,14 +1,14 @@
 package app.threedollars.data
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 open class BaseResponse<T>(
-    @Json(name = "data")
+    @SerialName("data")
     val data: T? = null,
-    @Json(name = "message")
+    @SerialName("message")
     val message: String? = "",
-    @Json(name = "resultCode")
+    @SerialName("resultCode")
     val resultCode: String? = ""
 )

@@ -5,25 +5,25 @@ import app.threedollars.common.ext.toStringDefault
 import app.threedollars.data.model.CategoryInfoModel
 import app.threedollars.domain.dto.CategoryInfoDto
 import app.threedollars.domain.dto.FaqDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class FaqResponse(
-    @Json(name = "answer")
+    @SerialName("answer")
     val answer: String? = "",
-    @Json(name = "category")
+    @SerialName("category")
     val category: String? = "",
-    @Json(name = "categoryInfo")
+    @SerialName("categoryInfo")
     val categoryInfo: CategoryInfoModel? = CategoryInfoModel(),
-    @Json(name = "createdAt")
+    @SerialName("createdAt")
     val createdAt: String? = "",
-    @Json(name = "faqId")
+    @SerialName("faqId")
     val faqId: Int? = 0,
-    @Json(name = "question")
+    @SerialName("question")
     val question: String? = "",
-    @Json(name = "updatedAt")
-    val updatedAt: String? = ""
+    @SerialName("updatedAt")
+    val updatedAt: String? = "",
 )
 
 fun List<FaqResponse>.toDto() = map {

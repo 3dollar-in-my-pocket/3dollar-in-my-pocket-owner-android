@@ -1,15 +1,15 @@
 package app.threedollars.data.request
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class AccountNumberRequest(
-    @Json(name = "accountNumber")
+    @SerialName("accountNumber")
     val accountNumber: String,
-    @Json(name = "accountHolder")
+    @SerialName("accountHolder")
     val accountHolder: String,
-    @Json(name = "bank")
+    @SerialName("bank")
     val bank: String,
 )

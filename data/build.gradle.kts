@@ -3,6 +3,7 @@ import java.util.Properties
 
 plugins {
     id("threedollars.android.library")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -45,5 +46,9 @@ dependencies {
     implementation(libs.datastore)
     implementation(libs.datastore.preferences)
     implementation(libs.paging)
+    implementation(libs.gson)
+    implementation(libs.gson.converter)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit.kotlin.serialization)
 
 }

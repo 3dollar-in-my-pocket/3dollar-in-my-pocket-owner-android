@@ -2,15 +2,15 @@ package app.threedollars.data.model
 
 
 import app.threedollars.domain.dto.FeedbacksDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class FeedbacksModel(
-    @Json(name = "count")
+    @SerialName("count")
     val count: Int = 0,
-    @Json(name = "feedbackType")
-    val feedbackType: String = ""
+    @SerialName("feedbackType")
+    val feedbackType: String = "",
 )
 
 fun List<FeedbacksModel>.toDto() = map {

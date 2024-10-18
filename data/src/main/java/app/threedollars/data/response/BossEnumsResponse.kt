@@ -4,52 +4,52 @@ import app.threedollars.data.BaseResponse
 import app.threedollars.data.model.EnumsModel
 import app.threedollars.data.model.toDto
 import app.threedollars.domain.dto.BossEnumsDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class BossEnumsResponse(
-    @Json(name = "PaymentMethodType")
+    @SerialName("PaymentMethodType")
     val paymentMethodType: List<EnumsModel> = listOf(),
-    @Json(name = "BossStoreOpenType")
+    @SerialName("BossStoreOpenType")
     val bossStoreOpenType: List<EnumsModel> = listOf(),
-    @Json(name = "FeedbackTargetType")
+    @SerialName("FeedbackTargetType")
     val feedbackTargetType: List<EnumsModel> = listOf(),
-    @Json(name = "AdvertisementPositionType")
+    @SerialName("AdvertisementPositionType")
     val advertisementPositionType: List<EnumsModel> = listOf(),
-    @Json(name = "UserMenuCategoryType")
+    @SerialName("UserMenuCategoryType")
     val userMenuCategoryType: List<EnumsModel> = listOf(),
-    @Json(name = "PushPlatformType")
+    @SerialName("PushPlatformType")
     val pushPlatformType: List<EnumsModel> = listOf(),
-    @Json(name = "BossRegistrationStatus")
+    @SerialName("BossRegistrationStatus")
     val bossRegistrationStatus: List<EnumsModel> = listOf(),
-    @Json(name = "StoreType")
+    @SerialName("StoreType")
     val storeType: List<EnumsModel> = listOf(),
-    @Json(name = "ApplicationType")
+    @SerialName("ApplicationType")
     val applicationType: List<EnumsModel> = listOf(),
-    @Json(name = "DayOfTheWeek")
+    @SerialName("DayOfTheWeek")
     val dayOfTheWeek: List<EnumsModel> = listOf(),
-    @Json(name = "PushOptionsType")
+    @SerialName("PushOptionsType")
     val pushOptionsType: List<EnumsModel> = listOf(),
-    @Json(name = "FileType")
+    @SerialName("FileType")
     val fileType: List<EnumsModel> = listOf(),
-    @Json(name = "BossAccountSocialType")
+    @SerialName("BossAccountSocialType")
     val bossAccountSocialType: List<EnumsModel> = listOf(),
-    @Json(name = "BoosRegistrationRejectReasonType")
+    @SerialName("BoosRegistrationRejectReasonType")
     val boosRegistrationRejectReasonType: List<EnumsModel> = listOf(),
-    @Json(name = "DeleteReasonType")
+    @SerialName("DeleteReasonType")
     val deleteReasonType: List<EnumsModel> = listOf(),
-    @Json(name = "VisitType")
+    @SerialName("VisitType")
     val visitType: List<EnumsModel> = listOf(),
-    @Json(name = "FaqCategory")
+    @SerialName("FaqCategory")
     val faqCategory: List<EnumsModel> = listOf(),
-    @Json(name = "StoreSalesType")
+    @SerialName("StoreSalesType")
     val storeSalesType: List<EnumsModel> = listOf(),
-    @Json(name = "UserSocialType")
+    @SerialName("UserSocialType")
     val userSocialType: List<EnumsModel> = listOf(),
-    @Json(name = "FeedbackEmojiType")
+    @SerialName("FeedbackEmojiType")
     val feedbackEmojiType: List<EnumsModel> = listOf(),
-    @Json(name = "Bank")
+    @SerialName("Bank")
     val bankType: List<EnumsModel> = listOf(),
 ) : BaseResponse<BossEnumsResponse>() {
     fun toDto() = BossEnumsDto(

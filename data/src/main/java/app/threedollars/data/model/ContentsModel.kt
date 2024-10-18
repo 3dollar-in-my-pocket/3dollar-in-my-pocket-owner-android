@@ -2,14 +2,15 @@ package app.threedollars.data.model
 
 
 import app.threedollars.domain.dto.ContentsDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class ContentsModel(
-    @Json(name = "date")
+    @SerialName("date")
     val date: String = "",
-    @Json(name = "feedbacks")
-    val feedbacks: List<FeedbacksModel> = listOf()
+    @SerialName("feedbacks")
+    val feedbacks: List<FeedbacksModel> = listOf(),
 )
+
 fun ContentsModel.toDto() = ContentsDto(date, feedbacks.toDto())

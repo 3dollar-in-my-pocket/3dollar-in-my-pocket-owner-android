@@ -2,35 +2,38 @@ package app.threedollars.data.response
 
 
 import app.threedollars.data.BaseResponse
-import app.threedollars.data.model.*
-import app.threedollars.domain.dto.BossAccountInfoDto
+import app.threedollars.data.model.CategoriesModel
+import app.threedollars.data.model.LocationModel
+import app.threedollars.data.model.MenusModel
+import app.threedollars.data.model.OpenStatusModel
+import app.threedollars.data.model.toDto
 import app.threedollars.domain.dto.BossStoreRetrieveAroundDto
 import app.threedollars.domain.dto.OpenStatusDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class BossStoreRetrieveAroundResponse(
-    @Json(name = "bossStoreId")
+    @SerialName("bossStoreId")
     val bossStoreId: String? = null,
-    @Json(name = "categories")
+    @SerialName("categories")
     val categories: List<CategoriesModel>? = listOf(),
-    @Json(name = "createdAt")
+    @SerialName("createdAt")
     val createdAt: String? = null,
-    @Json(name = "distance")
+    @SerialName("distance")
     val distance: Int? = null,
-    @Json(name = "location")
+    @SerialName("location")
     val location: LocationModel? = null,
-    @Json(name = "menus")
+    @SerialName("menus")
     val menus: List<MenusModel>? = listOf(),
-    @Json(name = "name")
+    @SerialName("name")
     val name: String? = null,
-    @Json(name = "openStatus")
+    @SerialName("openStatus")
     val openStatus: OpenStatusModel?,
-    @Json(name = "totalFeedbacksCounts")
+    @SerialName("totalFeedbacksCounts")
     val totalFeedbacksCounts: Int? = null,
-    @Json(name = "updatedAt")
-    val updatedAt: String? = null
+    @SerialName("updatedAt")
+    val updatedAt: String? = null,
 ) : BaseResponse<BossStoreRetrieveAroundResponse>()
 
 fun List<BossStoreRetrieveAroundResponse>.toDto() = map {

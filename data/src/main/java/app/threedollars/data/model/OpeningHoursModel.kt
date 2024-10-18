@@ -2,15 +2,15 @@ package app.threedollars.data.model
 
 
 import app.threedollars.domain.dto.OpeningHoursDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class OpeningHoursModel(
-    @Json(name = "startTime")
+    @SerialName("startTime")
     val startTime: String? = null,
-    @Json(name = "endTime")
-    val endTime: String? = null
-){
+    @SerialName("endTime")
+    val endTime: String? = null,
+) {
     fun toDto() = OpeningHoursDto(startTime, endTime)
 }

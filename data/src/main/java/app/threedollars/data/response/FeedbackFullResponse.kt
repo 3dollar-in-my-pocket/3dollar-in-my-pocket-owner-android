@@ -4,17 +4,17 @@ package app.threedollars.data.response
 import app.threedollars.common.ext.toStringDefault
 import app.threedollars.data.BaseResponse
 import app.threedollars.domain.dto.FeedbackFullDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class FeedbackFullResponse(
-    @Json(name = "count")
+    @SerialName("count")
     val count: Int? = 0,
-    @Json(name = "feedbackType")
+    @SerialName("feedbackType")
     val feedbackType: String? = "",
-    @Json(name = "ratio")
-    val ratio: String? = ""
+    @SerialName("ratio")
+    val ratio: String? = "",
 ) : BaseResponse<FeedbackFullResponse>()
 
 fun List<FeedbackFullResponse>.toDto() = map {

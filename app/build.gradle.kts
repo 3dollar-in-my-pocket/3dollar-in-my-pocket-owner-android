@@ -3,6 +3,7 @@ import java.util.Properties
 
 plugins {
     id("threedollars.android.application")
+    id("com.google.gms.google-services")
 }
 
 android {

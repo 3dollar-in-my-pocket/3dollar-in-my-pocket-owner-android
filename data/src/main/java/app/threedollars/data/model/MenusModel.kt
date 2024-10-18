@@ -2,17 +2,17 @@ package app.threedollars.data.model
 
 
 import app.threedollars.domain.dto.MenusDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class MenusModel(
-    @Json(name = "imageUrl")
+    @SerialName("imageUrl")
     val imageUrl: String? = null,
-    @Json(name = "name")
+    @SerialName("name")
     val name: String? = null,
-    @Json(name = "price")
-    val price: Int? = null
+    @SerialName("price")
+    val price: Int? = null,
 )
 
 fun List<MenusModel>.toDto() = map {

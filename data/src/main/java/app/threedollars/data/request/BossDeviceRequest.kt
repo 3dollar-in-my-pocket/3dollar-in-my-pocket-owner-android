@@ -1,12 +1,12 @@
 package app.threedollars.data.request
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class BossDeviceRequest(
-    @Json(name = "pushPlatformType")
+    @SerialName("pushPlatformType")
     val pushPlatformType: String? = null,
-    @Json(name = "pushToken")
-    val pushToken: String? = null
+    @SerialName("pushToken")
+    val pushToken: String? = null,
 )

@@ -2,15 +2,15 @@ package app.threedollars.data.model
 
 
 import app.threedollars.domain.dto.OpenStatusDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class OpenStatusModel(
-    @Json(name = "openStartDateTime")
+    @SerialName("openStartDateTime")
     val openStartDateTime: String? = null,
-    @Json(name = "status")
+    @SerialName("status")
     val status: String? = null,
-){
+) {
     fun toDto() = OpenStatusDto(openStartDateTime, status)
 }

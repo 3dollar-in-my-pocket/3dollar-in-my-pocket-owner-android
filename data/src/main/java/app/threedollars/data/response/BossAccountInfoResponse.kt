@@ -4,25 +4,25 @@ package app.threedollars.data.response
 import app.threedollars.common.ext.toStringDefault
 import app.threedollars.data.BaseResponse
 import app.threedollars.domain.dto.BossAccountInfoDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class BossAccountInfoResponse(
-    @Json(name = "bossId")
+    @SerialName("bossId")
     val bossId: String? = "",
-    @Json(name = "businessNumber")
+    @SerialName("businessNumber")
     val businessNumber: String? = "",
-    @Json(name = "createdAt")
+    @SerialName("createdAt")
     val createdAt: String? = "",
-    @Json(name = "isSetupNotification")
+    @SerialName("isSetupNotification")
     val isSetupNotification: Boolean? = false,
-    @Json(name = "name")
+    @SerialName("name")
     val name: String? = "",
-    @Json(name = "socialType")
+    @SerialName("socialType")
     val socialType: String? = "",
-    @Json(name = "updatedAt")
-    val updatedAt: String? = ""
+    @SerialName("updatedAt")
+    val updatedAt: String? = "",
 ) : BaseResponse<BossAccountInfoResponse>() {
     fun toDto() = BossAccountInfoDto(
         bossId = bossId.toStringDefault(),
