@@ -1,4 +1,4 @@
-package app.threedollars.manager.setting
+package app.threedollars.manager.feature.setting
 
 import android.content.Intent
 import android.net.Uri
@@ -19,7 +19,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,7 +27,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -36,20 +34,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
 import app.threedollars.common.BaseDialog
-import app.threedollars.manager.LoginActivity
-import app.threedollars.manager.R
-import app.threedollars.manager.sign.viewmodel.SettingViewModel
-import app.threedollars.manager.util.findActivity
+import app.threedollars.domain.dto.BossAccountInfoDto
+import app.threedollars.manager.feature.setting.components.SettingCategoryContent
 import com.google.firebase.messaging.FirebaseMessaging
 
 @Composable
 fun SettingScreen(
-    navController: NavHostController,
-    viewModel: SettingViewModel = hiltViewModel(),
+    bossAccountInfo: BossAccountInfoDto,
+    onClickSignOut: () -> Unit,
+    onClickLogOut: () -> Unit,
+    onClickFaq: (PageType) -> Unit,
+    onSwitchBossDevice: (Boolean, String) -> Unit,
 ) {
     val openWebPage = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result -> }
     val scrollState = rememberScrollState()
@@ -60,18 +56,8 @@ fun SettingScreen(
             .background(colorResource(id = R.color.black))
             .verticalScroll(scrollState)
     ) {
-        viewModel.getBossAccount()
-
-        val context = LocalContext.current
-
-        val bossAccountInfo by viewModel.bossAccountInfo.collectAsStateWithLifecycle(null)
-        val isSuccess by viewModel.isSuccess.collectAsStateWithLifecycle(false)
         var isSignOutDialog by remember { mutableStateOf(false) }
-        var switchOn by remember { mutableStateOf(false) }
-
-        LaunchedEffect(bossAccountInfo) {
-            switchOn = bossAccountInfo?.isSetupNotification == true
-        }
+        var switchOn by remember { mutableStateOf(bossAccountInfo.isSetupNotification) }
 
         if (isSignOutDialog) {
             BaseDialog(
@@ -80,12 +66,12 @@ fun SettingScreen(
                 confirmText = "탈퇴",
                 dismissText = "취소",
                 onConfirm = {
-                    viewModel.signOut()
+                    onClickSignOut()
                 },
                 onDismiss = { isSignOutDialog = false })
         }
         Text(
-            text = stringResource(R.string.setting),
+            text = "설정",
             fontWeight = FontWeight.W600,
             color = Color.White,
             modifier = Modifier
@@ -95,7 +81,7 @@ fun SettingScreen(
             fontSize = 16.sp
         )
         Text(
-            text = stringResource(R.string.boss_name, bossAccountInfo?.name.toString()),
+            text = stringResource(R.string.boss_name, bossAccountInfo.name),
             fontWeight = FontWeight.Bold,
             color = Color.White,
             modifier = Modifier
@@ -103,7 +89,7 @@ fun SettingScreen(
             fontSize = 24.sp
         )
         Text(
-            text = stringResource(R.string.setting_title),
+            text = "오늘도 적게 일하고 많이 버세요!",
             fontWeight = FontWeight.Normal,
             color = Color.White,
             modifier = Modifier
@@ -111,8 +97,8 @@ fun SettingScreen(
             fontSize = 24.sp
         )
         SettingCategoryContent(
-            leftText = stringResource(R.string.business_number),
-            rightText = bossAccountInfo?.businessNumber,
+            leftText = "사업자 번호",
+            rightText = bossAccountInfo.businessNumber,
             rightTextColor = R.color.gray30,
             modifier = Modifier.padding(top = 20.dp)
         )
@@ -140,16 +126,22 @@ fun SettingScreen(
                     switchOn = isSwitch
                     if (isSwitch) {
                         FirebaseMessaging.getInstance().token.addOnCompleteListener {
-                            viewModel.putBossDevice(it.result)
+                            onSwitchBossDevice(
+                                true,
+                                it.result
+                            )
                         }
                     } else {
-                        viewModel.deleteBossDevice()
+                        onSwitchBossDevice(
+                            false,
+                            ""
+                        )
                     }
                 }
             )
         }
         SettingCategoryContent(
-            leftText = stringResource(R.string.call), rightImage = R.drawable.ic_right_arrow,
+            leftText = "가슴속 삼천원팀에 연락하기", rightImage = R.drawable.ic_right_arrow,
             modifier = Modifier.padding(top = 8.dp),
             onClick = {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://pf.kakao.com/_RxghUb/chat"))
@@ -157,14 +149,14 @@ fun SettingScreen(
             }
         )
         SettingCategoryContent(
-            leftText = stringResource(id = R.string.faq), rightImage = R.drawable.ic_right_arrow,
+            leftText = "FAQ", rightImage = R.drawable.ic_right_arrow,
             modifier = Modifier.padding(top = 8.dp),
             onClick = {
-                navController.navigate(SettingNavItem.Faq.screenRoute)
+                onClickFaq(PageType.FAQ)
             }
         )
         SettingCategoryContent(
-            leftText = stringResource(R.string.privacy_policy), rightImage = R.drawable.ic_right_arrow,
+            leftText = "개인정보 처리방침", rightImage = R.drawable.ic_right_arrow,
             modifier = Modifier.padding(top = 8.dp),
             onClick = {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://pool-battery-996.notion.site/3-3d0a9c55ddd74086b63582c308ca285e"))
@@ -173,13 +165,13 @@ fun SettingScreen(
             }
         )
         SettingCategoryContent(
-            leftImage = if (bossAccountInfo?.socialType == "KAKAO") R.drawable.ic_logo_kakao else R.drawable.ic_logo_naver,
-            leftText = if (bossAccountInfo?.socialType == "KAKAO") stringResource(R.string.kakao_account_member) else stringResource(R.string.naver_account_member),
+            leftImage = if (bossAccountInfo.socialType == "KAKAO") R.drawable.ic_logo_kakao else R.drawable.ic_logo_naver,
+            leftText = if (bossAccountInfo.socialType == "KAKAO") "카카오 계정 회원" else "네이버 계정 회원",
             rightText = stringResource(R.string.logout),
             rightTextColor = R.color.red500,
             modifier = Modifier.padding(top = 8.dp),
             onClick = {
-                viewModel.logout()
+                onClickLogOut()
             }
         )
         Row(
@@ -194,15 +186,9 @@ fun SettingScreen(
             )
             Text(
                 modifier = Modifier.padding(start = 8.dp),
-                text = stringResource(R.string.signout),
+                text = "회원탈퇴",
                 color = colorResource(id = R.color.gray40)
             )
-        }
-        LaunchedEffect(isSuccess) {
-            if (isSuccess) {
-                context.startActivity(Intent(context, LoginActivity::class.java))
-                context.findActivity().finish()
-            }
         }
     }
 }

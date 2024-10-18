@@ -1,4 +1,4 @@
-package app.threedollars.manager.setting
+package app.threedollars.manager.feature.setting.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,7 +17,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import app.threedollars.manager.R
+import app.threedollars.manager.feature.setting.R
 
 @Composable
 fun SettingCategoryContent(

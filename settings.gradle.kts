@@ -26,5 +26,6 @@ include(
 
     ":data",
     ":domain",
-    ":common"
+    ":common",
+    ":feature:setting"
 )
