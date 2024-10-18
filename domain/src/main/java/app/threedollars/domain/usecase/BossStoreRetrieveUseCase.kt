@@ -3,12 +3,16 @@ package app.threedollars.domain.usecase
 import app.threedollars.common.Resource
 import app.threedollars.domain.dto.BossStoreRetrieveAroundDto
 import app.threedollars.domain.dto.BossStoreRetrieveDto
+import app.threedollars.domain.repository.StoreRepository
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-interface BossStoreRetrieveUseCase {
-    fun getBossStoreRetrieveSpecific(bossStoreId: String, latitude: Double, longitude: Double): Flow<Resource<BossStoreRetrieveDto>>
+class BossStoreRetrieveUseCase @Inject constructor(private val storeRepository: StoreRepository) {
 
-    fun getBossStoreRetrieveMe(): Flow<Resource<BossStoreRetrieveDto>>
+    fun getBossStoreRetrieveSpecific(bossStoreId: String, latitude: Double, longitude: Double): Flow<Resource<BossStoreRetrieveDto>> =
+        storeRepository.getBossStoreRetrieveSpecific(bossStoreId, latitude, longitude)
+
+    fun getBossStoreRetrieveMe(): Flow<Resource<BossStoreRetrieveDto>> = storeRepository.getBossStoreRetrieveMe()
 
     fun getBossStoreRetrieveAround(
         categoryId: String = "",
@@ -16,7 +20,7 @@ interface BossStoreRetrieveUseCase {
         mapLatitude: Double,
         mapLongitude: Double,
         orderType: String = "DISTANCE_ASC",
-        size: Int = 30
-    ): Flow<Resource<List<BossStoreRetrieveAroundDto>>>
-
+        size: Int = 30,
+    ): Flow<Resource<List<BossStoreRetrieveAroundDto>>> =
+        storeRepository.getBossStoreRetrieveAround(categoryId, distanceKm, mapLatitude, mapLongitude, orderType, size)
 }
