@@ -10,7 +10,6 @@ import app.threedollars.domain.usecase.BossStoreRetrieveUseCase
 import app.threedollars.domain.usecase.BossStoreUseCase
 import app.threedollars.domain.usecase.ImageUploadUseCase
 import app.threedollars.domain.usecase.PlatformStoreCategoryUseCase
-import app.threedollars.manager.sign.LoginNavItem
 import app.threedollars.manager.util.dtoToVo
 import app.threedollars.manager.vo.BossStoreRetrieveVo
 import app.threedollars.manager.vo.StoreCategoriesVo

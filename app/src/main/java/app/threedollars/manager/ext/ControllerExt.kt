@@ -5,7 +5,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.navOptions
 import app.threedollars.manager.feature.setting.navigation.navigateSetting
 import app.threedollars.manager.navigation.factory.TabType
-import app.threedollars.manager.navigation.navigateHome
+import app.threedollars.manager.feature.home.navigation.navigateHome
 import app.threedollars.manager.navigation.navigateStoreManagement
 
 fun NavController.navigateTab(tab: TabType) {
