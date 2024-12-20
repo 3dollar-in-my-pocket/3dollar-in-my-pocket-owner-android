@@ -37,11 +37,13 @@ import com.google.accompanist.permissions.*
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraPosition
 import com.naver.maps.map.compose.*
 import com.naver.maps.map.overlay.OverlayImage
 import kotlinx.coroutines.delay
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -126,9 +128,14 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
             }
         }
         if (isOpenServer) {
-            HomeBottomOn(Modifier.align(Alignment.BottomStart), bossStoreRetrieveMe?.openStatus?.openStartDateTime.toStringDefault()) {
-                viewModel.storeClosed(bossStoreRetrieveMe?.bossStoreId.toStringDefault())
-            }
+            HomeBottomOn(
+                modifier = Modifier.align(Alignment.BottomStart),
+                openDate = bossStoreRetrieveMe?.openStatus?.openStartDateTime.toStringDefault(),
+                viewModel = viewModel,
+                click = {
+                    viewModel.storeClosed(bossStoreRetrieveMe?.bossStoreId.toStringDefault())
+                }
+            )
         } else {
             HomeBottomOff(Modifier.align(Alignment.BottomStart)) {
                 if (location.latitude != 0.0)
@@ -139,12 +146,28 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun HomeBottomOn(modifier: Modifier, openDate: String, click: () -> Unit) {
+fun HomeBottomOn(
+    modifier: Modifier,
+    openDate: String,
+    click: () -> Unit,
+    viewModel: HomeViewModel = hiltViewModel()
+) {
     var openTime by remember { mutableStateOf("") }
+    var retryIndex by remember { mutableStateOf(0) }
     val scroll = rememberScrollState()
     LaunchedEffect(Unit) {
         while (true) {
-            openTime = openDate.getTodayOpenTime()
+            val parseData = openDate.getTodayOpenTime()
+            if (retryIndex > 5) {
+                FirebaseCrashlytics.getInstance().recordException(Exception("parse error"))
+                return@LaunchedEffect
+            }
+            if (parseData.isEmpty()) {
+                viewModel.getBossStoreRetrieveMe()
+                retryIndex++
+            } else {
+                openTime = parseData
+            }
             delay(1000L)
         }
     }
@@ -262,12 +285,16 @@ fun currentLocationState(context: Context, fusedLocationClient: FusedLocationPro
 }
 
 fun String.getTodayOpenTime(): String {
-    val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
-    val openTime = formatter.parse(this)
-    val currentTime = Date()
-    val durationInMillis = currentTime.time - (openTime?.time ?: 0)
-    val hours = durationInMillis / (60 * 60 * 1000)
-    val minutes = durationInMillis % (60 * 60 * 1000) / (60 * 1000)
-    val seconds = durationInMillis % (60 * 1000) / 1000
-    return String.format("%d시 %02d분 %02d초", hours, minutes, seconds)
+    try {
+        val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+        val openTime = formatter.parse(this)
+        val currentTime = Date()
+        val durationInMillis = currentTime.time - (openTime?.time ?: 0)
+        val hours = durationInMillis / (60 * 60 * 1000)
+        val minutes = durationInMillis % (60 * 60 * 1000) / (60 * 1000)
+        val seconds = durationInMillis % (60 * 1000) / 1000
+        return String.format("%d시 %02d분 %02d초", hours, minutes, seconds)
+    } catch (e: ParseException) {
+        return ""
+    }
 }

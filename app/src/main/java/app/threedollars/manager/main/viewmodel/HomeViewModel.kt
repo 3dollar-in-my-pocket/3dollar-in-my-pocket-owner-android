@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
         getBossStoreRetrieveMe()
     }
 
-    private fun getBossStoreRetrieveMe() {
+    fun getBossStoreRetrieveMe() {
         viewModelScope.launch(exceptionHandler) {
             bossStoreRetrieveUseCase.getBossStoreRetrieveMe().collect {
                 if (it.code.toString() == "200") {
