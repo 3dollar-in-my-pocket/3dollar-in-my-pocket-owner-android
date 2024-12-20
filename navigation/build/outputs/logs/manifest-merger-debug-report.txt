@@ -1,0 +1,16 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\k3000\AndroidStudioProjects\3dollar-in-my-pocket-manager-android\navigation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest2094584090205174745.xml:2:13-83
+INJECTED from C:\Users\k3000\AndroidStudioProjects\3dollar-in-my-pocket-manager-android\navigation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest2094584090205174745.xml:2:13-83
+	package
+		INJECTED from C:\Users\k3000\AndroidStudioProjects\3dollar-in-my-pocket-manager-android\navigation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest2094584090205174745.xml
+	xmlns:android
+		ADDED from C:\Users\k3000\AndroidStudioProjects\3dollar-in-my-pocket-manager-android\navigation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest2094584090205174745.xml:2:23-81
+uses-sdk
+INJECTED from C:\Users\k3000\AndroidStudioProjects\3dollar-in-my-pocket-manager-android\navigation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest2094584090205174745.xml reason: use-sdk injection requested
+INJECTED from C:\Users\k3000\AndroidStudioProjects\3dollar-in-my-pocket-manager-android\navigation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest2094584090205174745.xml
+INJECTED from C:\Users\k3000\AndroidStudioProjects\3dollar-in-my-pocket-manager-android\navigation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest2094584090205174745.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\k3000\AndroidStudioProjects\3dollar-in-my-pocket-manager-android\navigation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest2094584090205174745.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\k3000\AndroidStudioProjects\3dollar-in-my-pocket-manager-android\navigation\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest2094584090205174745.xml

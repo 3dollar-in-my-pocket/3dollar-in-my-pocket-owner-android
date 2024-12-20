@@ -4,6 +4,7 @@ import java.util.Properties
 plugins {
     id("threedollars.android.application")
     id("com.google.gms.google-services")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -81,6 +82,7 @@ dependencies {
     implementation(projects.data)
     implementation(projects.domain)
     implementation(projects.feature.setting)
+    implementation(projects.navigation)
 
     implementation(libs.firebase.messaging.ktx)
     implementation(libs.kakao.login)
@@ -94,4 +96,5 @@ dependencies {
     implementation(libs.dialog.time.compose)
 
     implementation(libs.moshi.kotlin)
+    implementation(libs.kotlinx.serialization.json)
 }
