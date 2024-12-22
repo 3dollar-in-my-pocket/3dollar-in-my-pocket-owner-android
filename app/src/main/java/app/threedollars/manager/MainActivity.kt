@@ -17,7 +17,7 @@ import app.threedollars.manager.feature.setting.navigation.settingNavGraph
 import app.threedollars.manager.navigation.MainNavigator
 import app.threedollars.manager.feature.home.navigation.homeNavGraph
 import app.threedollars.manager.navigation.rememberMainNavigator
-import app.threedollars.manager.navigation.storeManagementNavGraph
+import app.threedollars.manager.feature.storemanagement.navigation.storeManagementNavGraph
 import app.threedollars.manager.screen.BottomNavigation
 import app.threedollars.manager.util.findActivity
 import dagger.hilt.android.AndroidEntryPoint

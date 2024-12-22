@@ -2,10 +2,11 @@ package app.threedollars.manager.feature.storemanagement
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import javax.inject.Inject
 
 @HiltViewModel
 internal class StoreManagementViewModel @Inject constructor() : ViewModel() {
@@ -15,4 +16,11 @@ internal class StoreManagementViewModel @Inject constructor() : ViewModel() {
     val stateFlow: StateFlow<StoreManagementState> = _stateFlow.asStateFlow()
 
 
+    fun updateScreenType(screenType: ScreenType) {
+        _stateFlow.update {
+            it.copy(
+                screenType = screenType
+            )
+        }
+    }
 }

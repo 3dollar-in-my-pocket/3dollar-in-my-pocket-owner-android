@@ -82,6 +82,7 @@ dependencies {
     implementation(projects.data)
     implementation(projects.domain)
     implementation(projects.feature.home)
+    implementation(projects.feature.storemanagement)
     implementation(projects.feature.setting)
     implementation(projects.navigation)
 
