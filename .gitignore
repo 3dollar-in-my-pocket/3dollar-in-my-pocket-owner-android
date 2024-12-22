@@ -390,3 +390,19 @@ obj/
 # End of https://www.toptal.com/developers/gitignore/api/kotlin,java,android,androidstudio,macos,intellij+all,intellij+iml,windows
 
 app/ThreeDollarsManager.jks
+
+*.tab
+
+*.keystream
+
+*.len
+
+*.at
+
+*.tab_i
+
+*.bin
+
+*.txt
+
+*.salive
