@@ -15,7 +15,7 @@ import androidx.navigation.compose.NavHost
 import app.threedollars.manager.ext.navigateTab
 import app.threedollars.manager.feature.setting.navigation.settingNavGraph
 import app.threedollars.manager.navigation.MainNavigator
-import app.threedollars.manager.navigation.homeNavGraph
+import app.threedollars.manager.feature.home.navigation.homeNavGraph
 import app.threedollars.manager.navigation.rememberMainNavigator
 import app.threedollars.manager.navigation.storeManagementNavGraph
 import app.threedollars.manager.screen.BottomNavigation

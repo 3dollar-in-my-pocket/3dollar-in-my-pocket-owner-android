@@ -1,11 +1,11 @@
-package app.threedollars.manager.navigation
+package app.threedollars.manager.feature.home.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import app.threedollars.manager.main.ui.HomeScreen
 import app.threedollars.common.TabRoute
+import app.threedollars.manager.feature.home.HomeRoute
 
 fun NavController.navigateHome(navOptions: NavOptions) {
     navigate(
@@ -16,6 +16,6 @@ fun NavController.navigateHome(navOptions: NavOptions) {
 
 fun NavGraphBuilder.homeNavGraph() {
     composable<TabRoute.Home> {
-        HomeScreen()
+        HomeRoute()
     }
 }

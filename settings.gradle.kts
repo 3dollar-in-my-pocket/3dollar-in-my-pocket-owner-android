@@ -28,5 +28,6 @@ include(
     ":domain",
     ":common",
     ":feature:setting",
+    ":feature:home",
     ":navigation"
 )

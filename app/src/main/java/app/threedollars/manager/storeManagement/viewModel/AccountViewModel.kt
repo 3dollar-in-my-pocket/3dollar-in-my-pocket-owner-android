@@ -4,31 +4,21 @@ import androidx.lifecycle.viewModelScope
 import app.threedollars.common.BaseViewModel
 import app.threedollars.common.EventFlow
 import app.threedollars.common.MutableEventFlow
-import app.threedollars.common.ext.toStringDefault
-import app.threedollars.domain.dto.AppearanceDaysRequestDto
-import app.threedollars.domain.dto.BossStoreRetrieveDto
-import app.threedollars.domain.dto.EnumsDto
 import app.threedollars.domain.usecase.BossStoreRetrieveUseCase
 import app.threedollars.domain.usecase.BossStoreUseCase
 import app.threedollars.domain.usecase.EnumMapperUseCase
-import app.threedollars.manager.storeManagement.ui.businessschedule.ScheduleDay
 import app.threedollars.manager.util.dtoToVo
-import app.threedollars.manager.vo.AppearanceDaysVo
 import app.threedollars.manager.vo.BossStoreRetrieveVo
 import app.threedollars.manager.vo.EnumsVo
-import app.threedollars.manager.vo.OpeningHoursVo
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import okhttp3.RequestBody
 import javax.inject.Inject
 
 @HiltViewModel
 class AccountViewModel @Inject constructor(
     private val bossStoreRetrieveUseCase: BossStoreRetrieveUseCase,
     private val bossStoreUseCase: BossStoreUseCase,
-    private val enumMapperUseCase: EnumMapperUseCase
+    private val enumMapperUseCase: EnumMapperUseCase,
 ) : BaseViewModel() {
 
     private val _bossStoreRetrieveMe: MutableEventFlow<BossStoreRetrieveVo> = MutableEventFlow()
@@ -64,7 +54,7 @@ class AccountViewModel @Inject constructor(
         id: String,
         accountNumber: String,
         accountHolder: String,
-        accountBank: String
+        accountBank: String,
     ) {
         viewModelScope.launch(exceptionHandler) {
             bossStoreUseCase.patchBossStore(
