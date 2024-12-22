@@ -11,42 +11,42 @@ import app.threedollars.data.model.OpenStatusModel
 import app.threedollars.data.model.toDto
 import app.threedollars.domain.dto.AddressDto
 import app.threedollars.domain.dto.BossStoreRetrieveDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class BossStoreRetrieveResponse(
-    @Json(name = "bossStoreId")
+    @SerialName("bossStoreId")
     val bossStoreId: String? = null,
-    @Json(name = "isOwner")
+    @SerialName("isOwner")
     val isOwner: Boolean? = true,
-    @Json(name = "name")
+    @SerialName("name")
     val name: String? = null,
-    @Json(name = "location")
+    @SerialName("location")
     val location: LocationModel? = null,
-    @Json(name = "address")
+    @SerialName("address")
     val address: Address? = Address(),
-    @Json(name = "imageUrl")
+    @SerialName("imageUrl")
     val imageUrl: String? = null,
-    @Json(name = "introduction")
+    @SerialName("introduction")
     val introduction: String? = null,
-    @Json(name = "snsUrl")
+    @SerialName("snsUrl")
     val snsUrl: String? = null,
-    @Json(name = "menus")
+    @SerialName("menus")
     val menus: List<MenusModel>?,
-    @Json(name = "appearanceDays")
+    @SerialName("appearanceDays")
     val appearanceDays: List<AppearanceDaysModel>? = listOf(),
-    @Json(name = "categories")
+    @SerialName("categories")
     val categories: List<CategoriesModel>? = listOf(),
-    @Json(name = "accountNumbers")
+    @SerialName("accountNumbers")
     val accountNumbers: List<AccountNumbers>? = listOf(),
-    @Json(name = "openStatus")
+    @SerialName("openStatus")
     val openStatus: OpenStatusModel? = null,
-    @Json(name = "distance")
+    @SerialName("distance")
     val distance: Int? = null,
-    @Json(name = "createdAt")
+    @SerialName("createdAt")
     val createdAt: String? = null,
-    @Json(name = "updatedAt")
+    @SerialName("updatedAt")
     val updatedAt: String? = null,
 ) : BaseResponse<BossStoreRetrieveResponse>() {
     fun toDto() = BossStoreRetrieveDto(

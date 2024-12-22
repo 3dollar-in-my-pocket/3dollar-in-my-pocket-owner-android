@@ -1,15 +1,10 @@
-import Dependencies.common
 import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    id("threedollars.android.application")
     id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
-    id("com.google.firebase.appdistribution")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -28,8 +23,6 @@ android {
 
     defaultConfig {
         applicationId = "app.threedollars.manager"
-        minSdk = 23
-        targetSdk = 34
         versionCode = 8
         versionName = "1.1.3"
 
@@ -64,10 +57,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            firebaseAppDistribution {
-                releaseNotesFile = "./release_note.txt"
-                testers = "android"
-            }
             buildConfigField("String", "KAKAO_KEY","${localProperties["kakao_key_dev"]}")
             buildConfigField("String", "BASE_URL", "${localProperties["base_url_dev"]}")
             manifestPlaceholders["kakao_key"] = (localProperties["kakao_key_dev"] as String).replace("\"","")
@@ -89,8 +78,24 @@ android {
 }
 
 dependencies {
-    common()
-    implementation(project(":common"))
-    implementation(project(":data"))
-    implementation(project(":domain"))
+    implementation(projects.common)
+    implementation(projects.data)
+    implementation(projects.domain)
+    implementation(projects.feature.home)
+    implementation(projects.feature.setting)
+    implementation(projects.navigation)
+
+    implementation(libs.firebase.messaging.ktx)
+    implementation(libs.kakao.login)
+    implementation(libs.naver.map.compose)
+    implementation(libs.google.location)
+    implementation(libs.compose.permissions)
+    implementation(libs.lottie)
+    implementation(libs.compose.coil)
+    implementation(libs.paging.compose)
+    implementation(libs.dialog.compose)
+    implementation(libs.dialog.time.compose)
+
+    implementation(libs.moshi.kotlin)
+    implementation(libs.kotlinx.serialization.json)
 }

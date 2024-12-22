@@ -3,6 +3,7 @@ package app.threedollars.manager.storeManagement.ui.profile
 import android.app.Activity.RESULT_OK
 import android.net.Uri
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
@@ -11,10 +12,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,7 +46,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.RequestBody
 
 @AndroidEntryPoint
-class ProfileEditActivity : AppCompatActivity() {
+class ProfileEditActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -150,7 +151,7 @@ fun ProfileEditBottom(modifier: Modifier = Modifier, isEnable: Boolean = false, 
         onClick = { if (isEnable) onClick() },
         colors = ButtonDefaults.buttonColors(
             contentColor = Color.White,
-            backgroundColor = if (isEnable) Green else Gray30
+            containerColor = if (isEnable) Green else Gray30
         ),
         content = {
             Text(

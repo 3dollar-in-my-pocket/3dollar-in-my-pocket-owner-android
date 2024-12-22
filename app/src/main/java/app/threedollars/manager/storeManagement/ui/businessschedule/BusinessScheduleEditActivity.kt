@@ -3,6 +3,7 @@ package app.threedollars.manager.storeManagement.ui.businessschedule
 import android.app.Activity.RESULT_OK
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
@@ -27,12 +28,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -80,7 +81,7 @@ import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class BusinessScheduleEditActivity : AppCompatActivity() {
+class BusinessScheduleEditActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -373,15 +374,15 @@ fun BusinessScheduleDayDetail(
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Next),
                 singleLine = true,
-                colors = TextFieldDefaults.textFieldColors(
-                    placeholderColor = Gray30,
-                    backgroundColor = Gray5,
+                colors = TextFieldDefaults.colors(
+                    focusedPlaceholderColor = Gray30,
+                    focusedContainerColor = Gray5,
                     cursorColor = Gray30,
                     disabledTextColor = Color.Transparent,
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent,
-                    textColor = Gray100,
+                    focusedSupportingTextColor = Gray100,
                 ),
             )
         }
@@ -397,7 +398,7 @@ fun BusinessScheduleBottom(modifier: Modifier = Modifier, isEnable: Boolean = fa
         onClick = { if (isEnable) onClick() },
         colors = ButtonDefaults.buttonColors(
             contentColor = Color.White,
-            backgroundColor = if (isEnable) Green else Gray30,
+            containerColor = if (isEnable) Green else Gray30,
         ),
         content = {
             Text(

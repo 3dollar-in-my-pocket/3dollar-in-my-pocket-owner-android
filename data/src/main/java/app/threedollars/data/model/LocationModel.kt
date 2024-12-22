@@ -2,16 +2,16 @@ package app.threedollars.data.model
 
 
 import app.threedollars.domain.dto.LocationDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class LocationModel(
-    @Json(name = "latitude")
+    @SerialName("latitude")
     val latitude: Double? = null,
-    @Json(name = "longitude")
-    val longitude: Double? = null
-){
+    @SerialName("longitude")
+    val longitude: Double? = null,
+) {
     fun toDto() = LocationDto(latitude, longitude)
 
 }

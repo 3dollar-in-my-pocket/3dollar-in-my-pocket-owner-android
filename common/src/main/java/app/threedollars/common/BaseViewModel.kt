@@ -1,17 +1,16 @@
 package app.threedollars.common
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 open class BaseViewModel : ViewModel() {
 
     val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
-
+        Log.e("BaseViewModel", throwable.message.toString())
     }
 
     private val _isLoading: MutableEventFlow<Boolean> = MutableEventFlow()

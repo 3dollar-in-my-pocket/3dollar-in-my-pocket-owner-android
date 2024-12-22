@@ -3,6 +3,7 @@ package app.threedollars.manager.storeManagement.ui.account
 import android.app.Activity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.*
@@ -11,7 +12,14 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.SheetState
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,7 +51,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AccountActivity : AppCompatActivity() {
+class AccountActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -52,7 +60,7 @@ class AccountActivity : AppCompatActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun AddAccountScreen(viewModel: AccountViewModel = hiltViewModel()) {
@@ -63,7 +71,7 @@ fun AddAccountScreen(viewModel: AccountViewModel = hiltViewModel()) {
     var accountHolder by remember(bossStore) { mutableStateOf(bossStore?.accountNumbers?.firstOrNull()?.accountHolder.toStringDefault()) }
     var accountBank by remember(bossStore) { mutableStateOf(bossStore?.accountNumbers?.firstOrNull()?.bankVo) }
     val editComplete by viewModel.editComplete.collectAsStateWithLifecycle(initialValue = false)
-    val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(editComplete) {
@@ -78,103 +86,102 @@ fun AddAccountScreen(viewModel: AccountViewModel = hiltViewModel()) {
             .fillMaxSize(1f)
             .background(Gray0),
     ) {
-        ModalBottomSheetLayout(
-            sheetContent = {
-                Column {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 20.dp, vertical = 24.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            text = "은행 선택",
-                            style = TextStyle(
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = Black
-                            )
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column {
+                TopContent()
+                BodyContent(
+                    accountNumber = accountNumber,
+                    accountHolder = accountHolder,
+                    accountBankName = accountBank?.description,
+                    bottomSheetState = sheetState,
+                    onChangeAccountNumber = { accountNumber = it },
+                    onChangeAccountHolder = { accountHolder = it },
+                )
+            }
+            BottomContent(
+                isEnable = (accountBank != null) && (accountHolder.isNotEmpty()) && (accountNumber.isNotEmpty()),
+                onClick = {
+                    viewModel.patchBossStore(
+                        id = bossStore?.bossStoreId.toStringDefault(),
+                        accountNumber = accountNumber,
+                        accountHolder = accountHolder,
+                        accountBank = accountBank?.key.toStringDefault()
+                    )
+                }
+            )
+        }
+        ModalBottomSheet(
+            onDismissRequest = { coroutineScope.launch { sheetState.hide() } },
+            shape = RoundedCornerShape(16.dp),
+            containerColor = White,
+            sheetState = sheetState,
+        ) {
+            Column {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp, vertical = 24.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = "은행 선택",
+                        style = TextStyle(
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = Black
                         )
-                        Image(
-                            modifier = Modifier.clickable { coroutineScope.launch { sheetState.hide() } },
-                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_close_24),
-                            contentDescription = null
-                        )
-                    }
-                    LazyVerticalGrid(
-                        modifier = Modifier.defaultMinSize(minHeight = 100.dp),
-                        columns = GridCells.Fixed(2)
-                    ) {
-                        items(bankEnums) { bank ->
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(12.dp)
-                                    .border(
-                                        width = 1.dp,
-                                        color = if (accountBank?.key == bank.key) Green else Gray40,
-                                        shape = RoundedCornerShape(12.dp)
-                                    )
-                                    .clickable {
-                                        accountBank = BankVo(key = bank.key.toStringDefault(), description = bank.description.toStringDefault())
-                                    }
-                            ) {
-                                Text(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .padding(12.dp),
-                                    text = bank.description.toString(),
-                                    style = TextStyle(
-                                        fontSize = 14.sp,
-                                        fontWeight = FontWeight.Normal,
-                                        color = if (accountBank?.key == bank.key) Black else Gray50
-                                    )
+                    )
+                    Image(
+                        modifier = Modifier.clickable { coroutineScope.launch { sheetState.hide() } },
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_close_24),
+                        contentDescription = null
+                    )
+                }
+                LazyVerticalGrid(
+                    modifier = Modifier.defaultMinSize(minHeight = 100.dp),
+                    columns = GridCells.Fixed(2)
+                ) {
+                    items(bankEnums) { bank ->
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(12.dp)
+                                .border(
+                                    width = 1.dp,
+                                    color = if (accountBank?.key == bank.key) Green else Gray40,
+                                    shape = RoundedCornerShape(12.dp)
                                 )
-                                if (accountBank?.key == bank.key) {
-                                    Image(
-                                        modifier = Modifier
-                                            .padding(end = 12.dp)
-                                            .align(Alignment.CenterEnd),
-                                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_check_green_20),
-                                        contentDescription = null
-                                    )
+                                .clickable {
+                                    accountBank = BankVo(key = bank.key.toStringDefault(), description = bank.description.toStringDefault())
                                 }
+                        ) {
+                            Text(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(12.dp),
+                                text = bank.description.toString(),
+                                style = TextStyle(
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.Normal,
+                                    color = if (accountBank?.key == bank.key) Black else Gray50
+                                )
+                            )
+                            if (accountBank?.key == bank.key) {
+                                Image(
+                                    modifier = Modifier
+                                        .padding(end = 12.dp)
+                                        .align(Alignment.CenterEnd),
+                                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_check_green_20),
+                                    contentDescription = null
+                                )
                             }
                         }
                     }
                 }
-            },
-            sheetShape = RoundedCornerShape(16.dp),
-            sheetBackgroundColor = White,
-            sheetState = sheetState,
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize(),
-                verticalArrangement = Arrangement.SpaceBetween
-            ) {
-                Column {
-                    TopContent()
-                    BodyContent(
-                        accountNumber = accountNumber,
-                        accountHolder = accountHolder,
-                        accountBankName = accountBank?.description,
-                        bottomSheetState = sheetState,
-                        onChangeAccountNumber = { accountNumber = it },
-                        onChangeAccountHolder = { accountHolder = it },
-                    )
-                }
-                BottomContent(
-                    isEnable = (accountBank != null) && (accountHolder.isNotEmpty()) && (accountNumber.isNotEmpty()),
-                    onClick = {
-                        viewModel.patchBossStore(
-                            id = bossStore?.bossStoreId.toStringDefault(),
-                            accountNumber = accountNumber,
-                            accountHolder = accountHolder,
-                            accountBank = accountBank?.key.toStringDefault()
-                        )
-                    }
-                )
             }
         }
     }
@@ -208,15 +215,15 @@ fun TopContent() {
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BodyContent(
     accountNumber: String,
     accountHolder: String,
     accountBankName: String?,
-    bottomSheetState: ModalBottomSheetState,
+    bottomSheetState: SheetState,
     onChangeAccountNumber: (String) -> Unit,
-    onChangeAccountHolder: (String) -> Unit
+    onChangeAccountHolder: (String) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -243,10 +250,10 @@ private fun AccountHolderItem(accountHolder: String, onChangeAccountHolder: (Str
     )
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun BankItem(
-    accountBankName: String? = null, bottomSheetState: ModalBottomSheetState,
+    accountBankName: String? = null, bottomSheetState: SheetState,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val focusManager = LocalFocusManager.current
@@ -304,7 +311,7 @@ fun BottomContent(modifier: Modifier = Modifier, isEnable: Boolean = false, onCl
         onClick = { if (isEnable) onClick() },
         colors = ButtonDefaults.buttonColors(
             contentColor = Color.White,
-            backgroundColor = if (isEnable) Green else Gray30
+            containerColor = if (isEnable) Green else Gray30
         ),
         content = {
             Text(

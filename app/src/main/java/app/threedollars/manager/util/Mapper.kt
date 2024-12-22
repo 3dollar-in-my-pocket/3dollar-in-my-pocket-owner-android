@@ -13,16 +13,6 @@ fun AppearanceDaysDto.dtoToVo() = AppearanceDaysVo(
     locationDescription = locationDescription.toStringDefault(),
 )
 
-fun BossAccountInfoDto.dtoToVo() = BossAccountInfoVo(
-    bossId = bossId,
-    businessNumber = businessNumber,
-    createdAt = createdAt,
-    isSetupNotification = isSetupNotification,
-    name = name,
-    socialType = socialType,
-    updatedAt = updatedAt,
-)
-
 fun BossEnumsDto.dtoToVo() = BossEnumsVo(
     paymentMethodType = paymentMethodType.map { it.dtoToVo() },
     bossStoreOpenType = bossStoreOpenType.map { it.dtoToVo() },

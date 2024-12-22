@@ -2,15 +2,15 @@ package app.threedollars.data.response
 
 
 import app.threedollars.domain.dto.LoginDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class LoginResponse(
-    @Json(name = "bossId")
+    @SerialName("bossId")
     val bossId: String? = null,
-    @Json(name = "token")
-    val token: String? = null
+    @SerialName("token")
+    val token: String? = null,
 ) {
     fun toDto() = LoginDto(bossId, token)
 

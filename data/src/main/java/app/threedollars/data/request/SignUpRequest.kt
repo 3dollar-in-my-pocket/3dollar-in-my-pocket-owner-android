@@ -1,23 +1,23 @@
 package app.threedollars.data.request
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class SignUpRequest(
-    @Json(name = "bossName")
+    @SerialName("bossName")
     val bossName: String? = null,
-    @Json(name = "businessNumber")
+    @SerialName("businessNumber")
     val businessNumber: String? = null,
-    @Json(name = "certificationPhotoUrl")
+    @SerialName("certificationPhotoUrl")
     val certificationPhotoUrl: String? = null,
-    @Json(name = "socialType")
+    @SerialName("socialType")
     val socialType: String? = null,
-    @Json(name = "storeCategoriesIds")
+    @SerialName("storeCategoriesIds")
     val storeCategoriesIds: List<String>? = null,
-    @Json(name = "storeName")
+    @SerialName("storeName")
     val storeName: String? = null,
-    @Json(name = "token")
-    val token: String? = null
+    @SerialName("token")
+    val token: String? = null,
 )

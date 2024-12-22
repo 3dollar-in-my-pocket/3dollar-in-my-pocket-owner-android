@@ -2,12 +2,10 @@ package app.threedollars.common
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import app.threedollars.common.ext.repeatOnCreated
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.logEvent
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 abstract class BaseFragment<VM : BaseViewModel> : Fragment() {

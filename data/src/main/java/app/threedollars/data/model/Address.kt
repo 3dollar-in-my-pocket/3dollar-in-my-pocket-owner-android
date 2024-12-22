@@ -1,12 +1,12 @@
 package app.threedollars.data.model
 
 import app.threedollars.domain.dto.AddressDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Address(
-    @Json(name = "fullAddress")
+    @SerialName("fullAddress")
     val fullAddress: String? = "",
 ) {
     fun toDto() = AddressDto(fullAddress ?: "")

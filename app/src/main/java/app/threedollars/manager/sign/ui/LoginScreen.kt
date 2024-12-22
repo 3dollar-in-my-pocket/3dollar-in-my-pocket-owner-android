@@ -7,10 +7,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -93,7 +93,7 @@ fun SocialLoginButton(
             shape = RoundedCornerShape(23.dp),
             colors = ButtonDefaults.buttonColors(
                 contentColor = Color.Black,
-                backgroundColor = Yellow
+                containerColor = Yellow
             )
         ) {
             Row(

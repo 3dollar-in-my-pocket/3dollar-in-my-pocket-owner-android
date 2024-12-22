@@ -9,9 +9,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -40,7 +40,6 @@ import app.threedollars.manager.R
 import app.threedollars.manager.sign.viewmodel.WaitingViewModel
 
 @Composable
-@Preview
 fun WaitingScreen(
     navController: NavHostController,
     viewModel: WaitingViewModel = hiltViewModel()
@@ -86,7 +85,7 @@ fun WaitingScreen(
                 modifier = Modifier
                     .fillMaxWidth(),
                 shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Green),
+                colors = ButtonDefaults.buttonColors(containerColor = Green),
                 onClick = {
                     startActivity(context, intent, null)
                 }
@@ -104,7 +103,7 @@ fun WaitingScreen(
                     .fillMaxWidth()
                     .padding(top = 20.dp, bottom = 44.dp),
                 shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Gray95),
+                colors = ButtonDefaults.buttonColors(containerColor = Gray95),
                 onClick = {
                     viewModel.logout()
                 }

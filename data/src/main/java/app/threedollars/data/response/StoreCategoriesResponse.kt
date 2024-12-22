@@ -3,23 +3,23 @@ package app.threedollars.data.response
 
 import app.threedollars.common.ext.toStringDefault
 import app.threedollars.domain.dto.StoreCategoriesDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class StoreCategoriesResponse(
-    @Json(name = "category")
+    @SerialName("category")
     val category: String? = "",
-    @Json(name = "categoryId")
+    @SerialName("categoryId")
     val categoryId: String? = "",
-    @Json(name = "description")
+    @SerialName("description")
     val description: String? = "",
-    @Json(name = "imageUrl")
+    @SerialName("imageUrl")
     val imageUrl: String? = "",
-    @Json(name = "isNew")
+    @SerialName("isNew")
     val isNew: Boolean? = false,
-    @Json(name = "name")
-    val name: String? = ""
+    @SerialName("name")
+    val name: String? = "",
 )
 
 fun List<StoreCategoriesResponse>.toDto() = map {

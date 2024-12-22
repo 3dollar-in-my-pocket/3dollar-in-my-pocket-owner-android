@@ -2,19 +2,19 @@ package app.threedollars.data.model
 
 
 import app.threedollars.domain.dto.AppearanceDaysRequestDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class AppearanceDaysRequestModel(
-    @Json(name = "dayOfTheWeek")
+    @SerialName("dayOfTheWeek")
     val dayOfTheWeek: String? = null,
-    @Json(name = "startTime")
+    @SerialName("startTime")
     val startTime: String? = null,
-    @Json(name = "endTime")
+    @SerialName("endTime")
     val endTime: String? = null,
-    @Json(name = "locationDescription")
-    val locationDescription: String? = null
-){
+    @SerialName("locationDescription")
+    val locationDescription: String? = null,
+) {
     fun toDto() = AppearanceDaysRequestDto(dayOfTheWeek, startTime, endTime, locationDescription)
 }

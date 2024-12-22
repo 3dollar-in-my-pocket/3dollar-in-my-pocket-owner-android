@@ -1,18 +1,18 @@
 package app.threedollars.data.model
 
 import app.threedollars.domain.dto.AccountNumbersDto
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class AccountNumbers(
-    @Json(name = "bank")
+    @SerialName("bank")
     val bank: Bank = Bank(),
-    @Json(name = "accountHolder")
+    @SerialName("accountHolder")
     val accountHolder: String = "",
-    @Json(name = "accountNumber")
+    @SerialName("accountNumber")
     val accountNumber: String = "",
-    @Json(name = "description")
+    @SerialName("description")
     val description: String? = null,
 ) {
     fun toDto() = AccountNumbersDto(
