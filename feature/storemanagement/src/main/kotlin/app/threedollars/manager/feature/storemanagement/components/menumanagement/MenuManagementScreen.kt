@@ -162,7 +162,6 @@ internal fun MenuManagementScreen(
                         items(count = menuList.size) { index ->
                             var menuName by remember { mutableStateOf(menuList[index].name ?: "") }
                             var price by remember { mutableStateOf(if (menuList[index].price == null) "" else menuList[index].price.toString()) }
-
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Box(
                                     modifier = Modifier
@@ -198,10 +197,7 @@ internal fun MenuManagementScreen(
                                             menuList[index].imageUrl.toString().toUri()
                                         },
                                         onChangeUri = {
-                                            Log.e("11111111111111", it.toString())
-                                            Log.e("22222222222", menuList[index].imageRequestBody.toString())
                                             menuList[index].imageRequestBody = it
-                                            Log.e("3333333333333", menuList[index].imageRequestBody.toString())
                                         }
                                     )
                                     Column(
@@ -401,7 +397,6 @@ internal fun MenuManagementScreen(
                     if (isClickDeleteButton) {
                         isClickDeleteButton = false
                     } else {
-                        Log.e("\"5555555555555\"", menuList.toString())
                         onMenuPatch(
                             BossStorePatchModel(
                                 bossStoreId = bossStoreRetrieve.bossStoreId,

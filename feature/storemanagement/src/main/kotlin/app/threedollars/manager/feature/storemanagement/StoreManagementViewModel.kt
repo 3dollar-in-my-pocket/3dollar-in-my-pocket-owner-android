@@ -255,7 +255,7 @@ internal class StoreManagementViewModel @Inject constructor(
     fun patchMenu(
         bossStorePatchModel: BossStorePatchModel,
     ) {
-        val list = bossStorePatchModel.menus?.filter { it.imageRequestBody != null }?.map {
+        val imageRequestBodyList = bossStorePatchModel.menus?.filter { it.imageRequestBody != null }?.map {
             it.imageRequestBody as RequestBody
         }
         _stateFlow.update {
@@ -278,7 +278,7 @@ internal class StoreManagementViewModel @Inject constructor(
                     }
                 }
             } else {
-                if (list.isNullOrEmpty()) {
+                if (imageRequestBodyList.isNullOrEmpty()) {
                     val menus = bossStorePatchModel.menus.filter {
                         !it.name.isNullOrEmpty() &&
                                 it.price != null &&
@@ -301,20 +301,23 @@ internal class StoreManagementViewModel @Inject constructor(
                         }
                     }
                 } else {
-                    Log.e("3q28409328490", list.toString())
                     imageUploadUseCase.postImageUploadBulk(
                         fileType = "BOSS_STORE_MENU_IMAGE",
-                        requestBodyList = list
+                        requestBodyList = imageRequestBodyList
                     ).collect { resource ->
                         if (resource.code == "200") {
                             resource.data?.let { dtoList ->
-                                dtoList.mapIndexed { index, imageUploadDto ->
-                                    bossStorePatchModel.menus[index].copy(
-                                        imageUrl = imageUploadDto.imageUrl
-                                    )
+                                var index = 0
+                                bossStorePatchModel.menus.map { model ->
+                                    if (model.imageRequestBody != null && index < dtoList.size) {
+                                        model.copy(
+                                            imageUrl = dtoList[index++].imageUrl
+                                        )
+                                    } else {
+                                        model
+                                    }
                                 }.run {
-                                    Log.e("%56555542523w4", this.toString())
-                                    val menus = bossStorePatchModel.menus.map { menuModel ->
+                                    val menus = this.map { menuModel ->
                                         MenusDto(
                                             imageUrl = menuModel.imageUrl,
                                             name = menuModel.name,
