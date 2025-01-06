@@ -11,7 +11,7 @@ import app.threedollars.domain.usecase.ImageUploadUseCase
 import app.threedollars.domain.usecase.PlatformStoreCategoryUseCase
 import app.threedollars.manager.sign.LoginNavItem
 import app.threedollars.manager.util.dtoToVo
-import app.threedollars.manager.vo.StoreCategoriesVo
+import app.threedollars.manager.feature.storemanagement.model.StoreCategoriesVo
 import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.auth.TokenManager
 import dagger.hilt.android.lifecycle.HiltViewModel

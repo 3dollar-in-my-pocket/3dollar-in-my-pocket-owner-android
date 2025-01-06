@@ -33,8 +33,6 @@
 
 
         <activity android:name=".MainActivity" />
-        <activity android:name=".storeManagement.ui.BossCommentActivity" />
-        <activity android:name=".storeManagement.ui.MenuManagementActivity" />
 
         <activity
             android:name=".LoginActivity"
@@ -60,9 +58,6 @@
                     android:scheme="kakao${kakao_key}" />
             </intent-filter>
         </activity>
-        <activity android:name="app.threedollars.manager.storeManagement.ui.profile.ProfileEditActivity" />
-        <activity android:name="app.threedollars.manager.storeManagement.ui.businessschedule.BusinessScheduleEditActivity" />
-        <activity android:name="app.threedollars.manager.storeManagement.ui.account.AccountActivity" />
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"

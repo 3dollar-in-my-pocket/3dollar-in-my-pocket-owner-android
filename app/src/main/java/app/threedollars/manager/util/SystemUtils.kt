@@ -32,19 +32,3 @@ inline fun Modifier.noRippleClickable(crossinline onClick: ()->Unit): Modifier =
     }
 }
 
-suspend fun convertImageUrlToRequestBody(imageUrl: String): RequestBody? {
-    return withContext(Dispatchers.IO) {
-        try {
-            val client = OkHttpClient()
-            val request = Request.Builder()
-                .url(imageUrl)
-                .build()
-            val response = client.newCall(request).execute()
-            val body = response.body?.bytes()
-            body?.toRequestBody("image/*".toMediaTypeOrNull())
-        } catch (e: Exception) {
-            e.printStackTrace()
-            null
-        }
-    }
-}
