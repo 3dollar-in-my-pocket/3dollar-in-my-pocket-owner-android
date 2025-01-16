@@ -22,14 +22,17 @@ internal fun Context.getCurrentLocationName(location: LatLng?): String {
 
     val geoCoder = Geocoder(this, Locale.KOREA)
     return try {
-        val addresses: List<Address> =
-            geoCoder.getFromLocation(location.latitude, location.longitude, 1) as List<Address>
-        if (addresses.isEmpty()) {
+        val addresses = geoCoder.getFromLocation(location.latitude, location.longitude, 1)
+        if (addresses.isNullOrEmpty()) {
             notFindMsg
         } else {
             with(addresses[0]) {
-                val locality = subLocality ?: locality
-                "$adminArea $locality"
+                val locality = subLocality ?: locality ?: ""
+                val region = adminArea ?: ""
+                if (region.isEmpty() && locality.isEmpty()) {
+                    return notFindMsg
+                }
+                "$region $locality"
             }
         }
     } catch (e: Exception) {
@@ -38,18 +41,37 @@ internal fun Context.getCurrentLocationName(location: LatLng?): String {
     }
 }
 
-internal fun currentLocationState(context: Context, fusedLocationClient: FusedLocationProviderClient, onCurrentLocation: (LatLng) -> Unit) {
+internal fun currentLocationState(
+    context: Context,
+    fusedLocationClient: FusedLocationProviderClient,
+    onCurrentLocation: (LatLng) -> Unit
+) {
     val permissionCheck =
-        ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        ActivityCompat.checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
     if (permissionCheck) {
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
             if (location != null) {
-                onCurrentLocation(LatLng(location.latitude, location.longitude))
+                if (location.latitude in -90.0..90.0 && location.longitude in -180.0..180.0) {
+                    onCurrentLocation(LatLng(location.latitude, location.longitude))
+                } else {
+                    Toast.makeText(context, "잘못된 위치 값입니다.", Toast.LENGTH_SHORT).show()
+                }
             } else {
                 Toast.makeText(context, "위치정보가 없습니다.", Toast.LENGTH_SHORT).show()
             }
+        }.addOnFailureListener { e ->
+            Log.e("currentLocationState", e.message ?: "위치 가져오기 실패")
+            Toast.makeText(context, "위치를 가져오는데 실패했습니다.", Toast.LENGTH_SHORT).show()
         }
+    } else {
+        Toast.makeText(context, "위치 권한이 없습니다.", Toast.LENGTH_SHORT).show()
     }
 }
 
