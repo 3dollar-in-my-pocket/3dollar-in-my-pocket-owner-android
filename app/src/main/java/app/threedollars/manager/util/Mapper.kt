@@ -1,17 +1,9 @@
 package app.threedollars.manager.util
 
 import app.threedollars.common.ext.toBooleanDefault
-import app.threedollars.common.ext.toDoubleDefault
-import app.threedollars.common.ext.toIntDefault
-import app.threedollars.common.ext.toStringDefault
 import app.threedollars.domain.dto.*
+import app.threedollars.manager.feature.storemanagement.model.StoreCategoriesVo
 import app.threedollars.manager.vo.*
-
-fun AppearanceDaysDto.dtoToVo() = AppearanceDaysVo(
-    dayOfTheWeek = dayOfTheWeek.toStringDefault(),
-    openingHours = openingHours.dtoToVo(),
-    locationDescription = locationDescription.toStringDefault(),
-)
 
 fun BossEnumsDto.dtoToVo() = BossEnumsVo(
     paymentMethodType = paymentMethodType.map { it.dtoToVo() },
@@ -35,45 +27,6 @@ fun BossEnumsDto.dtoToVo() = BossEnumsVo(
     userSocialType = userSocialType.map { it.dtoToVo() },
     feedbackEmojiType = feedbackEmojiType.map { it.dtoToVo() },
     bankType = bankType.map { it.dtoToVo() },
-)
-
-fun BossStoreRetrieveAroundDto.dtoToVo() = BossStoreRetrieveAroundVo(
-    bossStoreId = bossStoreId.toStringDefault(),
-    categories = categories.map { it.dtoToVo() },
-    createdAt = createdAt.toStringDefault(),
-    distance = distance.toIntDefault(),
-    location = location?.dtoToVo() ?: LocationVo(),
-    menus = menus.map { it.dtoToVo() },
-    name = name.toStringDefault(),
-    openStatus = openStatus.dtoToVo(),
-    totalFeedbacksCounts = totalFeedbacksCounts.toIntDefault(),
-    updatedAt = updatedAt.toStringDefault(),
-)
-
-fun BossStoreRetrieveDto?.dtoToVo() = BossStoreRetrieveVo(
-    appearanceDays = this?.appearanceDays.orEmpty().map { it.dtoToVo() },
-    bossStoreId = this?.bossStoreId.toStringDefault(),
-    categories = this?.categories.orEmpty().map { it.dtoToVo() },
-    createdAt = this?.createdAt.toStringDefault(),
-    distance = this?.distance.toIntDefault(),
-    imageUrl = this?.imageUrl.toStringDefault(),
-    introduction = this?.introduction.toStringDefault(),
-    location = this?.location.dtoToVo(),
-    menus = this?.menus.orEmpty().map { it.dtoToVo() },
-    name = this?.name.toStringDefault(),
-    openStatus = this?.openStatus.dtoToVo(),
-    snsUrl = this?.snsUrl.toStringDefault(),
-    updatedAt = this?.updatedAt.toStringDefault(),
-    accountNumbers = this?.accountNumbersDto?.map { it.dtoToVo() } ?: listOf()
-)
-
-fun CategoriesDto.dtoToVo() = CategoriesVo(
-    category = category.toStringDefault(),
-    categoryId = categoryId.toStringDefault(),
-    description = description.toStringDefault(),
-    imageUrl = imageUrl.toStringDefault(),
-    isNew = isNew ?: false,
-    name = name.toStringDefault(),
 )
 
 fun CategoryInfoDto.dtoToVo() = CategoryInfoVo(
@@ -113,12 +66,6 @@ fun FavoriteDto?.dtoToVo() = FavoriteVo(
     isFavorite = this?.isFavorite?.toBooleanDefault() ?: false,
 )
 
-fun FeedbackFullDto.dtoToVo() = FeedbackFullVo(
-    count = count,
-    feedbackType = feedbackType,
-    ratio = ratio,
-)
-
 fun FeedbackSpecificDto.dtoToVo() = FeedbackSpecificVo(
     contents = contents.map { it.dtoToVo() },
     cursor = cursor.dtoToVo(),
@@ -129,40 +76,13 @@ fun FeedbacksDto.dtoToVo() = FeedbacksVo(
     feedbackType = feedbackType,
 )
 
-fun FeedbackTypesDto.dtoToVo() = FeedbackTypesVo(
-    description = description,
-    emoji = emoji,
-    feedbackType = feedbackType,
-)
-
 fun ImageUploadDto.dtoToVo() = ImageUploadVo(
     imageUrl = imageUrl,
-)
-
-fun LocationDto?.dtoToVo() = LocationVo(
-    latitude = this?.latitude.toDoubleDefault(),
-    longitude = this?.longitude.toDoubleDefault(),
 )
 
 fun LoginDto.dtoToVo() = LoginVo(
     bossId = bossId,
     token = token,
-)
-
-fun MenusDto.dtoToVo() = MenusVo(
-    imageUrl = imageUrl,
-    name = name,
-    price = price,
-)
-
-fun OpeningHoursDto?.dtoToVo() = OpeningHoursVo(
-    startTime = this?.startTime.toStringDefault(),
-    endTime = this?.endTime.toStringDefault(),
-)
-
-fun OpenStatusDto?.dtoToVo() = OpenStatusVo(
-    openStartDateTime = this?.openStartDateTime?.toStringDefault(),
-    status = this?.status?.toStringDefault(),
 )
 
 fun StoreCategoriesDto.dtoToVo() = StoreCategoriesVo(
@@ -172,16 +92,4 @@ fun StoreCategoriesDto.dtoToVo() = StoreCategoriesVo(
     imageUrl = imageUrl,
     isNew = isNew,
     name = name,
-)
-
-fun AccountNumbersDto.dtoToVo() = AccountNumbersVo(
-    bankVo = bankDto.dtoToVo(),
-    accountHolder = accountHolder,
-    accountNumber = accountNumber,
-    description = description,
-)
-
-fun BankDto.dtoToVo() = BankVo(
-    key = key,
-    description = description,
 )

@@ -2,6 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="app.threedollars.manager.navigation" >
 
-    <uses-sdk android:minSdkVersion="28" />
+    <uses-sdk android:minSdkVersion="34" />
 
 </manifest>

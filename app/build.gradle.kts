@@ -23,8 +23,8 @@ android {
 
     defaultConfig {
         applicationId = "app.threedollars.manager"
-        versionCode = 8
-        versionName = "1.1.3"
+        versionCode = 10
+        versionName = "1.1.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -82,6 +82,7 @@ dependencies {
     implementation(projects.data)
     implementation(projects.domain)
     implementation(projects.feature.home)
+    implementation(projects.feature.storemanagement)
     implementation(projects.feature.setting)
     implementation(projects.navigation)
 

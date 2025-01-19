@@ -406,3 +406,5 @@ app/ThreeDollarsManager.jks
 *.txt
 
 *.salive
+
+*.flat

@@ -12,7 +12,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.threedollars.common.ui.Green
 import app.threedollars.common.ui.MildGreen
-import app.threedollars.manager.vo.StoreCategoriesVo
+import app.threedollars.manager.feature.storemanagement.model.StoreCategoriesVo
 
 @Composable
 fun SignCategoryButtonContent(storeCategoriesVo: StoreCategoriesVo, onClick: () -> Unit) {

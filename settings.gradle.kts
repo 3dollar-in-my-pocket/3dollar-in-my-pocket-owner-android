@@ -27,7 +27,8 @@ include(
     ":data",
     ":domain",
     ":common",
-    ":feature:setting",
     ":feature:home",
+    ":feature:setting",
+    ":feature:storemanagement",
     ":navigation"
 )
